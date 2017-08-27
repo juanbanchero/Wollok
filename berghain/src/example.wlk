@@ -15,14 +15,32 @@ object gustavotruccensen {
 }
 object mainRoom {
 	method bailar(persona){
-		persona.estaEnMainRoom()
+		persona.disminuirEnergia(40)
+		persona.aumentarDiversion(30)
 	}
 }
 object panoramaBar {
 	var dj = #{dixon,marcelDettmann,tommyMunoz}
 	
 	method bailar(persona){
-		
+		dj.tocarEnPanoramaBar(persona)
+	}
+}
+object dixon {
+	method tocarEnPanoramaBar(persona){
+		persona.disminuirEnergia(60)
+		persona.aumentarDiversion(120)
+	}
+}
+object marcelDettmann {
+	method tocarEnPanoramaBar(persona){
+		persona.disminuirEnergia(persona.energia())
+		persona.aumentarDiversion(1000)
+	}
+}
+object tommyMunoz {
+	method tocarEnPanoramaBar(persona){
+		persona.disminuirEnergia(80)
 	}
 }
 
@@ -35,13 +53,17 @@ object vonLukaz {
 	method edad() {
 		return edad
 	}
-
+	method energia(){
+		return energia
+	}
 	method colorRopa() {
 		return colorRopa
 	}
-	method estaEnMainRoom(){
-		energia -= 40
-		diversion += 30
+	method disminuirEnergia(cantidad){
+		energia -= cantidad
+	}
+	method aumentarDiversion(cantidad){
+		diversion += cantidad
 	}
 }
 object bianker {
@@ -53,12 +75,17 @@ object bianker {
 	method edad() {
 		return edad
 	}
+	method energia(){
+		return energia
+	}
 	method colorRopa() {
 		return colorRopa
 	}
-	method estaEnMainRoom(){
-		energia -= 40
-		diversion += 30
+	method disminuirEnergia(cantidad){
+		energia -= cantidad
+	}
+	method aumentarDiversion(cantidad){
+		diversion += cantidad
 	}
 }
 
@@ -71,11 +98,16 @@ object gonzen {
 	method edad() {
 		return edad
 	}
+	method energia(){
+		return energia
+	}
 	method colorRopa() {
 		return colorRopa
 	}
-	method estaEnMainRoom(){
-		energia -= 40
-		diversion += 30
+	method disminuirEnergia(cantidad){
+		energia -= cantidad
+	}
+	method aumentarDiversion(cantidad){
+		diversion += cantidad
 	}
 }
