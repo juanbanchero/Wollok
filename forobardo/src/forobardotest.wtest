@@ -1,0 +1,93 @@
+import foroBardo.*
+describe "Test para los panelistas"{
+test "Horacio comienza con 0 en nivel de enojo" {
+    assert.that(horacioPagani.nivelDeEnojo() == 0)
+}
+test "Horacio aumenta su nivel de energia en 10" {
+	horacioPagani.elevarVoz()
+	assert.that(horacioPagani.nivelDeEnojo() == 10)	
+}
+test "Horacio aumenta su nivel de enojo dependiendo de la cantidad indicada (10 en este caso)" {
+	horacioPagani.aumentarNivelDeEnojo(10)
+	assert.that(horacioPagani.nivelDeEnojo() == 10)
+}
+test "Horacio disminuye su nivel de enojo dependiendo de la cantidad indicada (10 en este caso), si su nivel es menor a 0 queda en 0" {
+	horacioPagani.disminuirNivelDeEnojo(10)
+	assert.that(horacioPagani.nivelDeEnojo() == 0)
+}
+test "Pagani toma agua y su nivel de enojo es de 9" {
+	horacioPagani.elevarVoz()	
+	horacioPagani.tomarAgua()
+	assert.equals(9,horacioPagani.nivelDeEnojo())
+}
+
+test "Pagani se calma 5 minutos, pero no pasa nada porque esta caliente y su nivel de enojo es 20" {
+	horacioPagani.aumentarNivelDeEnojo(20)
+	horacioPagani.calmarse(5)
+	assert.equals(20,horacioPagani.nivelDeEnojo())
+}
+
+test "Toti comienza con un nivel 0 de soberbia pero sin sed" {
+	assert.equals(0,totiPasman.soberbia())
+	assert.equals(false,totiPasman.tieneSed())
+}
+test "Toti eleva la voz: su nivel de soberbia es 10 y tiene sed" {
+	totiPasman.elevarVoz()
+	assert.equals(10,totiPasman.soberbia())
+	assert.that(totiPasman.tieneSed())
+}
+
+test "Toti toma agua y no tiene sed" {
+	totiPasman.elevarVoz()
+	totiPasman.tomarAgua()
+	assert.equals(false,totiPasman.tieneSed())
+}
+test "Toti se calma 5 minutos y su soberbia es de 0" {
+	totiPasman.aumentarSoberbia(10)
+	totiPasman.calmarse(5)
+	assert.equals(0,totiPasman.soberbia())
+}
+
+test "Fantino hace opinar de Deportes a Pagani el nivel de enojo queda en 0" {
+	fantino.hacerOpinarDeportesA(horacioPagani)
+	assert.equals(0,horacioPagani.nivelDeEnojo())
+}
+
+test "Fantino hace opinar de Deportes a Toti su nivel de soberbia es de 20 y tiene sed" {
+	totiPasman.aumentarSoberbia(30)
+	fantino.hacerOpinarDeportesA(totiPasman)
+	assert.equals(20,totiPasman.soberbia())
+	assert.that(!totiPasman.tieneSed())
+}
+test "Polino hace opinar de chimentos a Pagani el nivel de enojo queda en 18" {
+	horacioPagani.aumentarNivelDeEnojo(20)
+	polino.hacerOpinarDeChimentosA(horacioPagani)
+	assert.equals(18,horacioPagani.nivelDeEnojo())
+}
+
+test "Polino hace opinar de chimentos a Toti el nivel de enojo queda en 18" {
+	totiPasman.aumentarSoberbia(30)
+	polino.hacerOpinarDeChimentosA(totiPasman)
+	assert.equals(20,totiPasman.soberbia())
+	assert.that(!(totiPasman.tieneSed()))
+}
+
+test "Lizzy comienza con un humor de 30" {
+	assert.equals(30,lizzyTagliani.humor())
+}
+
+test "Lizzy toma agua y su humor es de 90" {
+	lizzyTagliani.tomarAgua()
+	assert.equals(90,lizzyTagliani.humor())
+}
+
+test "Lizzy se calma 5 minutos y su humor sigue en 30" {
+	lizzyTagliani.calmarse(5)
+	assert.equals(30,lizzyTagliani.humor())
+}
+
+test "Polino hace opinar de Chimentos a Lizzy y su humor es de 90" {
+	polino.hacerOpinarDeChimentosA(lizzyTagliani)
+	assert.equals(90,lizzyTagliani.humor())
+}
+}
