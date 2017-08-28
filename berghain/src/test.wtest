@@ -1,0 +1,41 @@
+import example.*
+
+describe "Tests de Berghain" {
+
+	test "El patovica es Rochensen por lo que Bianker puede pasar" {
+		berghain.patovica(rochensen)
+		assert.that(berghain.quiereEntrar(bianker))
+	}
+	test "El patovica es Gustavotruccensen por lo que Gonzen no puede pasar" {
+		berghain.patovica(gustavotruccensen)
+		assert.that(!(berghain.quiereEntrar(gonzen)))
+	}
+	test "El patovica es rodrigsen por lo que vonLukaz no puede pasar" {
+		berghain.patovica(rodrigsen)
+		assert.equals(berghain.quiereEntrar(vonLukaz), false)
+	}
+	test "Von Lukaz y Gonzen van a bailar al Paranorama Bar con Dixon 
+  		  Von Lukaz queda con 90 de energía y 190 de diversion y Gonzen con 30 de energía y 135 de diversion" {
+  		panoramaBar.dj(dixon)
+    	panoramaBar.bailar(vonLukaz)
+    	panoramaBar.bailar(gonzen)
+    	assert.equals(90,vonLukaz.energia())
+    	assert.equals(190,vonLukaz.diversion())
+    	assert.equals(30,gonzen.energia())
+    	assert.equals(135,gonzen.diversion())
+    }
+    test "Von Lukaz va a bailar al panoramaBar que esta marcelDettmann de dj, mientras que gonzen y bianker van al dark room. Hay 2 personas en el dark room, 
+		  1 en el panoramaBar y 0 en el mainRoom" {
+		panoramaBar.dj(marcelDettmann)
+    	panoramaBar.bailar(vonLukaz)
+    	darkRoom.bailar(bianker)
+    	darkRoom.bailar(gonzen)
+    	assert.equals(2,darkRoom.cantidadDePersonasBailando())
+    	assert.equals(1,panoramaBar.cantidadDePersonasBailando())
+    	assert.equals(0,mainRoom.cantidadDePersonasBailando())
+    }
+    test "Gonzen va a bailar al mainRoom" {
+    	mainRoom.bailar(gonzen)
+    	assert.that(berghain.seEncuentraEnAlgunaPista(gonzen))
+    }
+}

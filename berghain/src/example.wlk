@@ -1,7 +1,14 @@
 object berghain {
 	var patovica
+	var pistasDeBaile = #{mainRoom,panoramaBar,darkRoom}
 	method patovica(patova){
 		patovica = patova
+	}
+	method quiereEntrar(persona){
+		return patovica.dejarPasar(persona)
+	}
+	method seEncuentraEnAlgunaPista(persona) {
+		return pistasDeBaile.any({pista => pista.estaBailandoUnaPersona(persona)})
 	}
 }
 object rochensen {
@@ -29,8 +36,8 @@ object mainRoom {
 	method cantidadDePersonasBailando(){
 		return personasBailando.size()
 	}
-	method estaBailandoGonzen(){
-		return personasBailando.contains(gonzen)
+	method estaBailandoUnaPersona(persona){
+		return personasBailando.contains(persona)
 	}
 }
 object panoramaBar {
@@ -46,8 +53,8 @@ object panoramaBar {
 	method cantidadDePersonasBailando(){
 		return personasBailando.size()
 	}
-	method estaBailandoGonzen(){
-		return personasBailando.contains(gonzen)
+	method estaBailandoUnaPersona(persona){
+		return personasBailando.contains(persona)
 	}
 }
 object darkRoom {
@@ -58,8 +65,8 @@ object darkRoom {
 	method cantidadDePersonasBailando(){
 		return personasBailando.size()
 	}
-	method estaBailandoGonzen(){
-		return personasBailando.contains(gonzen)
+	method estaBailandoUnaPersona(persona){
+		return personasBailando.contains(persona)
 	}
 }
 object dixon {
@@ -101,6 +108,9 @@ object vonLukaz {
 	method aumentarDiversion(cantidad){
 		diversion += cantidad
 	}
+	method diversion(){
+		return diversion
+	}
 }
 object bianker {
 	var energia = 140 
@@ -122,6 +132,9 @@ object bianker {
 	}
 	method aumentarDiversion(cantidad){
 		diversion += cantidad
+	}
+	method diversion(){
+		return diversion
 	}
 }
 
@@ -145,5 +158,8 @@ object gonzen {
 	}
 	method aumentarDiversion(cantidad){
 		diversion += cantidad
+	}
+	method diversion(){
+		return diversion
 	}
 }
