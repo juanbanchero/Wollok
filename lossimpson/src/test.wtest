@@ -1,0 +1,47 @@
+import example.*
+
+describe "Tests" {
+	
+	test "La central atomica con 10 varillas produce 1 Mkwh en springfield" {
+		centralAtomica.cantidadDeVarillasDeUranio(10)
+		assert.equals(1,centralAtomica.produccionEnergetica())
+	}
+	
+	test "La central de carbón exBosque con una capacidad de 20 toneladas produce 18.5 Mkwh en springfield." {
+		centralDeCarbon.capacidadEnToneladas(20)
+		assert.equals(18.5,centralDeCarbon.produccionEnergetica())
+	}
+	
+	test "La central eolica produce 2 Mkwh en springfield." {
+		assert.equals(2,centralEolica.produccionEnergetica())
+	}
+	
+	test "Teniendo en cuenta los tests anteriores la unica contaminante es la eolica" {
+		centralAtomica.cantidadDeVarillasDeUranio(10)
+		centralDeCarbon.capacidadEnToneladas(20)
+		assert.equals(1,springfield.centralesContaminantes().size())
+		assert.that(springfield.centralesContaminantes().contains(centralDeCarbon))
+	}
+	
+	test "Teniendo en cuenta tests anteriores, springfield cubre su necesidad energetica siendo esta de 20" {
+		centralAtomica.cantidadDeVarillasDeUranio(10)
+		centralDeCarbon.capacidadEnToneladas(20)
+		springfield.produccionNecesaria(20)
+		assert.that(springfield.necesidadesCubiertas())
+	}
+	
+	test "Teniendo las tests anteriores, springfield está al horno si posee una necesidad energética de 30 Mkwh." {
+		centralAtomica.cantidadDeVarillasDeUranio(10)
+		centralDeCarbon.capacidadEnToneladas(20)
+		springfield.produccionNecesaria(30)
+		assert.that(springfield.estaEnElHorno())
+	}
+	
+	test "Teniendo tests anteriores de springfield, las centrales más productoras de la región donde ésta se encuentra es una colección con exBosque de springfield y la central hidroeléctrica de albuquerque." {
+		centralAtomica.cantidadDeVarillasDeUranio(10)
+		centralDeCarbon.capacidadEnToneladas(20)
+		assert.equals(2,region.lasCentralesMasProductoras().size())
+		assert.that(region.lasCentralesMasProductoras().contains(centralDeCarbon))
+		assert.that(region.lasCentralesMasProductoras().contains(centralHidroelectrica))
+	}
+}

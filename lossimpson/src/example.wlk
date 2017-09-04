@@ -9,12 +9,14 @@ object centralAtomica {
   	method cantidadDeVarillasDeUranio(unaCantidad) {
   		cantidadDeVarillasDeUranio = unaCantidad
   	}
+  	
 
 }
 
 object centralDeCarbon{
 	var ciudad = springfield
 	var capacidadEnToneladas
+
 	method capacidadEnToneladas(unaCapacidad){
 		capacidadEnToneladas = unaCapacidad
 	}
@@ -90,5 +92,11 @@ object centralHidroelectrica{
 	var ciudad = albuquerque
 	method produccionEnergetica(){
 		return 2 * ciudad.caudalRio()
+	}
+}
+object region {
+	var ciudades = #{springfield,albuquerque}
+	method lasCentralesMasProductoras(){
+		return ciudades.map({ ciudad => ciudad.laQueMasProduce()})
 	}
 }
