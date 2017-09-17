@@ -16,6 +16,10 @@ class EnfermedadInfecciosa {
 	method esAgresiva(unaPersona){
 		return celulasAmenazadas > unaPersona.celulas()*0.1 
 	}
+	method celulasAmenazadas(){
+		return celulasAmenazadas
+	}
+	
 	
 
 }

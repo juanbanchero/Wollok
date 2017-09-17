@@ -3,7 +3,7 @@ import enfermedadInfecciosa.*
 class Persona {
 	var temperatura
 	var celulas
-	var enfermedades = []
+	var enfermedades = #{}
 	
 	constructor(unaTemperatura,unaCantidadDeCelulas){
 		temperatura =  unaTemperatura
@@ -26,6 +26,15 @@ class Persona {
 	}
 	method vivirUnDia(){
 		enfermedades.forEach({enfermedad => enfermedad.infectarA(self) })
+	}
+	method enfermedades(){
+		return enfermedades
+	}
+	method laEnfermedadMasAgresiva(){
+	 	return enfermedades.max({enfermedad => enfermedad.celulasAmenazadas()})
+	}
+	method cantidadDeCelulasAmenazadasPorAgresiva(unaPersona){
+		return enfermedades.map({enfermedad => enfermedad.esAgresiva(self) && enfermedad.celulasAmenazadas()})
 	}
 
 }

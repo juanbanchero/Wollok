@@ -1,7 +1,7 @@
 import persona.*
 class EnfermedadAutoinmune {
 	var celulasAmenazadas
-	var personasAfectadas = []
+	var personasAfectadas = new Dictionary()
 
 	constructor(cantidadDeCelulasAmenazadas){
 		
@@ -9,10 +9,26 @@ class EnfermedadAutoinmune {
 	}
 	method infectarA(unaPersona){
 		unaPersona.matarCelulas(celulasAmenazadas)
-		personasAfectadas.add(unaPersona)	
+		self.sumarUnDiaPara(unaPersona)	
 		}
 	method esAgresiva(unaPersona){
 		return personasAfectadas.contains(unaPersona) && personasAfectadas.filter(unaPersona).size() > 30
 		}
+		
+	method sumarUnDiaPara(unaPersona) {
+		personasAfectadas.put(unaPersona, self.cantidadDiasAfectandoA(unaPersona) + 1)
+	}
+	
+	method esAgresivaPara(unaPersona) {
+		return self.cantidadDiasAfectandoA(unaPersona) > 30
+	}
+	
+	method cantidadDiasAfectandoA(unaPersona) {
+		
+		return personasAfectadas.getOrElse(unaPersona, {0})
+	}
+	method celulasAmenazadas(){
+		return celulasAmenazadas
+	}
 
 }

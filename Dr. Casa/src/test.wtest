@@ -1,0 +1,39 @@
+import persona.*
+import enfermedadAutoinmine.*
+import enfermedadInfecciosa.*
+describe "tests de dr casa" {
+	
+	test "Test 1: Hacer que Frank contraiga la enfermedad del item b" {
+		var frank = new Persona(36,3500000)
+		var malaria = new EnfermedadInfecciosa(800)
+		frank.contraerEnfermedad(malaria)
+		assert.that(frank.enfermedades().contains(malaria))
+	}
+	
+	test "Test 2: Hacer que una malaria se reproduzca" {
+		var logan = new Persona(36,3000000)
+		var malaria = new EnfermedadInfecciosa(500)
+        var otitis = new EnfermedadInfecciosa(100)
+        var lupus = new EnfermedadAutoinmune(10000)
+        logan.contraerEnfermedad(malaria)
+        logan.contraerEnfermedad(otitis)
+        logan.contraerEnfermedad(lupus)
+        malaria.reproducirse()
+        assert.equals(1000,malaria.celulasAmenazadas())
+	}
+	test "Test 3: Hacer que Logan viva un día de su vida para verificar:
+
+			a. la cantidad de células afectadas de Logan que estén afectadas por
+				enfermedades agresivas.
+			b. la enfermedad de Logan que más células afecte."{
+		var logan = new Persona(36,3000000)
+		var malaria = new EnfermedadInfecciosa(500)
+        var otitis = new EnfermedadInfecciosa(100)
+        var lupus = new EnfermedadAutoinmune(10000)
+        logan.contraerEnfermedad(malaria)
+        logan.contraerEnfermedad(otitis)
+        logan.contraerEnfermedad(lupus)
+        logan.vivirUnDia()
+		assert.equals(lupus,logan.laEnfermedadMasAgresiva())
+	}
+}	
